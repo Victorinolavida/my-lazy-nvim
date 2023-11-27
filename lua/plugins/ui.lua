@@ -6,17 +6,17 @@ return {
       table.insert(opts.routes, {
         filter = {
           event = "notify",
-          find = "no information available",
+          find = "No information available",
         },
         opts = { skip = true },
       })
       local focused = true
-      vim.api.nvim_create_autocmd("focusgained", {
+      vim.api.nvim_create_autocmd("FocusGained", {
         callback = function()
           focused = true
         end,
       })
-      vim.api.nvim_create_autocmd("focuslost", {
+      vim.api.nvim_create_autocmd("FocusLost", {
         callback = function()
           focused = false
         end,
@@ -33,14 +33,14 @@ return {
 
       opts.commands = {
         all = {
-          -- options for the message history that you get with `:noice`
+          -- options for the message history that you get with `:Noice`
           view = "split",
           opts = { enter = true, format = "details" },
           filter = {},
         },
       }
 
-      vim.api.nvim_create_autocmd("filetype", {
+      vim.api.nvim_create_autocmd("FileType", {
         pattern = "markdown",
         callback = function(event)
           vim.schedule(function()
@@ -63,7 +63,7 @@ return {
   -- animations
   {
     "echasnovski/mini.animate",
-    event = "verylazy",
+    event = "VeryLazy",
     opts = function(_, opts)
       opts.scroll = {
         enable = false,
@@ -74,10 +74,10 @@ return {
   -- buffer line
   {
     "akinsho/bufferline.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     keys = {
-      { "<tab>", "<cmd>bufferlinecyclenext<cr>", desc = "next tab" },
-      { "<s-tab>", "<cmd>bufferlinecycleprev<cr>", desc = "prev tab" },
+      { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
+      { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
     },
     opts = {
       options = {
@@ -92,7 +92,7 @@ return {
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     opts = {
       options = {
         -- globalstatus = false,
@@ -105,14 +105,14 @@ return {
   {
     "b0o/incline.nvim",
     dependencies = { "craftzdog/solarized-osaka.nvim" },
-    event = "bufreadpre",
+    event = "BufReadPre",
     priority = 1200,
     config = function()
       local colors = require("solarized-osaka.colors").setup()
       require("incline").setup({
         highlight = {
           groups = {
-            inclinenormal = { guibg = colors.magenta500, guifg = colors.base04 },
+            InclineNormal = { guibg = colors.magenta500, guifg = colors.base04 },
             InclineNormalNC = { guifg = colors.violet500, guibg = colors.base03 },
           },
         },
@@ -145,7 +145,22 @@ return {
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
-  {
-    "nvim-tree/nvim-web-devicons",
-  },
+
+  -- {
+  --   "nvimdev/dashboard-nvim",
+  --   event = "VimEnter",
+  --   opts = function(_, opts)
+  --     local logo = [[
+  --       ██████╗ ███████╗██╗   ██╗ █████╗ ███████╗██╗     ██╗███████╗███████╗
+  --       ██╔══██╗██╔════╝██║   ██║██╔══██╗██╔════╝██║     ██║██╔════╝██╔════╝
+  --       ██║  ██║█████╗  ██║   ██║███████║███████╗██║     ██║█████╗  █████╗
+  --       ██║  ██║██╔══╝  ╚██╗ ██╔╝██╔══██║╚════██║██║     ██║██╔══╝  ██╔══╝
+  --       ██████╔╝███████╗ ╚████╔╝ ██║  ██║███████║███████╗██║██║     ███████╗
+  --       ╚═════╝ ╚══════╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═╝     ╚══════╝
+  --     ]]
+  --
+  --     logo = string.rep("\n", 8) .. logo .. "\n\n"
+  --     opts.config.header = vim.split(logo, "\n")
+  --   end,
+  -- },
 }
